@@ -6,38 +6,48 @@ public class GuessTheNumber {
         Scanner sc = new Scanner(System.in);
         Random rd = new Random();
 
-        int random = rd.nextInt(201);
-        System.out.println("Guess a Number Between 0 to 200 :  ");
-        int guess = sc.nextInt();
+        // While (True) for Continuing Game (Try Again) OPTION Type
+        while (true) {
+            int random = rd.nextInt(201);
+            System.out.println("Guess a Number Between 0 to 200 :  ");
+            int guess = sc.nextInt();
 
-        int attempt = 5;
-        int max_attempt = 5;
+            int attempt = 0;
+            int max_attempt = 7; // 7 Attempts Allowed
 
-        while (guess != random) {
-            attempt++;
-            max_attempt--;
-            if (guess > 200) {
-                System.out.println("Error...!! CHOOSE A NUMBER BETWEEN 0 TO 200");
-                return;
-            } else if (max_attempt == 0) {
-                System.out.println("You lose Your All Attempts Try Again...");
-                return;
+            while (guess != random) {
+                attempt++; // Counts the Attempts
+                max_attempt--;
+                if (guess > 200) {
+                    System.out.println("Error...!! CHOOSE A NUMBER BETWEEN 0 TO 200");
+                    return;
+                } else if (max_attempt == 0) {
+                    System.out.println("You lose Your All Attempts Try Again...");
+                }
+
+                if (random == guess) {
+                    System.out.println("Congrats..!! Your Guess Is Correct..");
+                    return;
+                } else if (random < guess) {
+                    System.out.println("Your Guess is MORE Than the Actual Number, Choose a SMALLER Number..!! ");
+                    guess = sc.nextInt();
+                } else {
+                    System.out.println("Your Guess is LESS Than the Actual Number, Choose a GREATER  Number..!! ");
+                    guess = sc.nextInt();
+                }
             }
+            System.out.println("Congrats..!! You Guessed The Number in " + attempt + " Attempts");
+            System.out.println("Yes OfCourse The Correct Number Was : " + random);
 
-            if (random == guess) {
-                System.out.println("Congrats..!! Your Guess Is Correct..");
-                return;
-            } else if (random < guess) {
-                System.out.println("Your Guess is MORE Than the Actual Number, Choose a SMALLER Number..!! ");
-                guess = sc.nextInt();
-            } else {
-                System.out.println("Your Guess is LESS Than the Actual Number, Choose a GREATER  Number..!! ");
-                guess = sc.nextInt();
+            // Ask to Play Again
+            System.out.println("Do You Want to Play Again? (yes/no): ");
+            String choice = sc.next().toLowerCase();
+
+            if (choice.equalsIgnoreCase("no")) {
+                System.out.println("Nice to Play with you. Get Back Soon.. ");
+                break;
             }
         }
-        System.out.println("Congrats..!! You Guessed The Number in " + attempt + " Attempts");
-
-        System.out.println("The Correct Number Was : " + random);
 
     }
 }
